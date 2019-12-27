@@ -1,0 +1,3 @@
+[submodule "ns"]
+	path = ns
+	url = git@github.com:NervSys/NervSys.git

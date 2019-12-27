@@ -1,0 +1,44 @@
+.fa{
+    margin-right:20px;line-height:25px;
+}
+.fa-r{
+    float:right;
+}
+.menu-list{
+   font-size:16px;
+}
+.avater img{
+    width:100%;border-radius:50%;
+}
+.second-menu.active{
+    background: #5b5b5b;
+}
+.second-menu.active a{
+    color:white !important;
+}
+.search-section{
+    width:98%;background:white;margin-top:10px;padding-top:20px;padding-left:2%;
+}
+
+.modal-container {
+    background: white;
+}
+
+.layer-bottom {
+    height: 42px;
+    line-height: 42px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+    overflow: hidden;
+    background-color: #F8F8F8;
+    border-radius: 2px 2px 0 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+}
+
+.layer-bottom button {
+    margin-right: 20px;
+}
