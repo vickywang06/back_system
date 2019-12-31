@@ -5,7 +5,13 @@
     <div class="t-right">
         <?php require './top.php' ; ?>
         <div class="b-contianer">
-                <table class="layui-table" lay-skin="line" id="table" lay-size="lg" lay-filter="demo"></table>
+            <div class="search-section">
+                <div class="list-button-section">
+                    <button class="layui-btn layui-btn-normal" onclick="refresh()">刷新</button>
+                </div>
+            </div>
+
+            <table class="layui-table" lay-skin="line" id="table" lay-size="lg" lay-filter="demo"></table>
         </div>
     </div>
 </div>

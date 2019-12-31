@@ -122,4 +122,7 @@
             }
         })
     }
+    function refresh() {
+        location.reload();
+    }
 </script>
