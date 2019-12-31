@@ -19,7 +19,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">group</label>
             <div class="layui-input-block">
-                <input type="text" name="group" lay-verify="required" autocomplete="off" placeholder="请输入group名" class="layui-input" value="">
+                <input type="text" name="group" autocomplete="off" placeholder="请输入group名" class="layui-input" value="">
             </div>
         </div>
         <div class="layui-form-item">
@@ -31,9 +31,9 @@
             <div class="layui-input-inline">
                 <input type="text" name="val[]" autocomplete="off" placeholder="请输入参数值" class="layui-input" value="">
             </div>
-            <i class="layui-icon layui-icon-add-circle-fine" style="cursor:pointer;font-size: 30px;margin-top:5px;display: inline-block; color: rgb(90,139,255);"></i>
+            <i class="layui-icon layui-icon-add-circle-fine" onclick="add()" style="cursor:pointer;font-size: 30px;margin-top:5px;display: inline-block; color: rgb(90,139,255);"></i>
         </div>
-        <div class="layui-form-item">
+        <div class="layui-form-item" id="typediv">
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block">
                 <select name="type" class="layui-select" lay-filter="qtype">
@@ -78,5 +78,19 @@
         });
 
     });
+
+    function add() {
+        var h='<div class="layui-form-item">\n' +
+            '            <label class="layui-form-label"></label>\n' +
+            '            <div class="layui-input-inline">\n' +
+            '                <input type="text" name="key[]"  autocomplete="off" placeholder="请输入参数名"\n' +
+            '                       class="layui-input" value="">\n' +
+            '            </div>\n' +
+            '            <div class="layui-input-inline">\n' +
+            '                <input type="text" name="val[]" autocomplete="off" placeholder="请输入参数值" class="layui-input" value="">\n' +
+            '            </div>\n' +
+            '        </div>';
+        $('#typediv').before(h);
+    }
 
 </script>

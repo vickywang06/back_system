@@ -1,4 +1,7 @@
 <div class="top">
+    <div class="project-div">
+        当前项目：<span id="project_name"></span>
+    </div>
     <div class="user-box">
         <div class="user">
             <span class="user-name">Admin</span>

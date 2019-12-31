@@ -22,20 +22,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="first-menu <?php if(strpos($menu,'2_')===0){ echo 'active';}?>">
-                <a href="javascript:;">消息管理 <i class="fa fa-r fa-angle-right" aria-hidden="true"></i></a>
-                    <ul <?php if(strpos($menu,'2_')===0){ echo 'style="display:block"';}?>">
-                        <li class="second-menu <?php if($menu=='2_1'){ echo 'active';}?>"">
-                        <a href="./listen_queue.php?menu=2_1">查看队列组</a>
-                        </li>
-                        <li class="second-menu <?php if($menu=='2_2'){ echo 'active';}?>"">
-                        <a href="./listen_queue.php?menu=2_2">成功任务列表</a>
-                        </li>
-                        <li class="second-menu <?php if($menu=='2_3'){ echo 'active';}?>"">
-                        <a href="./listen_queue.php?menu=2_3">失败任务列表</a>
-                        </li>
-                    </ul>
-            </li>
         </ul>
     </div>
 </div>

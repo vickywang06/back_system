@@ -6,11 +6,8 @@
         <?php require './top.php' ; ?>
         <div class="b-contianer">
 
-
-
-
                 <div class="search-section">
-                    <form class="layui-form">
+                 <!--   <form class="layui-form">
 
                         <div class="layui-form-item" style="margin-bottom:0;">
                             <div class="layui-inline">
@@ -23,19 +20,14 @@
                             </div>
 
                         </div>
-                    </form>
+                    </form>-->
                     <hr class="layui-bg-gray">
                     <div class="list-button-section">
                         <button class="layui-btn major-btn2" onclick="start()">开启主进程</button>
                     </div>
                 </div>
 
-
                 <table class="layui-table" lay-skin="line" id="table" lay-filter="demo"></table>
-
-
-
-
 
         </div>
     </div>
@@ -43,37 +35,18 @@
 </body>
 <?php require './footer.php' ; ?>
 <script type="text/html" id="barDemo">
-    <i class="fa fa-trash handleDel" data-id="1" lay-event="del" aria-hidden="true" title="删除"></i>
+    <i class="fa fa-trash handleDel" data-id="1" lay-event="del" aria-hidden="true" title="杀进程"></i>
 </script>
 <script>
     function start() {
         ajax_com('queueManage/queueManage-go',{},function (res) {
             if(res.code==200){
-                layer.msg('开启成功');
+                layer.msg('开启中。。。');
             }else{
                 layer.msg(res.message, {icon: 5});
             }
         })
     }
-/*ajax_com('queueManage/queueManage-show_queue',{},function (res) {
-    if(res.code==200){
-        var html='';
-        $.each(res.data,function (key,val) {
-            html+='<tr>\n' +
-                '                        <td>'+key+'</td>\n' +
-                '                        <td>'+val+'</td>\n' +
-                '                        <td class="td-menu">\n' +
-                '                            <i class="fa fa-pencil-square-o handleEdit" aria-hidden="true" title="编辑"></i>\n' +
-                '                            <i class="fa fa-trash handleDel" data-id="1" aria-hidden="true" title="删除"></i>\n' +
-                '                        </td>\n' +
-                '                    </tr>';
-        })
-        $('#tab-con').html(html);
-    }else{
-        alert(res.message);
-    }
-})*/
-
     var cols = [[
         {field:'id', width:80, title: 'ID',type:'numbers'}
         ,{field:'title', minWidth:120, title: 'key名称'}
@@ -84,5 +57,23 @@
     var cmd = 'queueManage/queueManage-show_process';
     var where = {};
     load_table_data(cmd,where,cols);
+    layui.use(['table'], function() {
+        var table = layui.table;
+        //监听工具条
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data;
+            var c = data.title;
+            if (obj.event === 'del') {
+                ajax_com('queueManage/queueManage-kill',{"process_no":c},function (res) {
+                    if(res.code==200){
+                        layer.msg('操作成功');
+                        location.reload();
+                    }else{
+                        layer.msg(res.message, {icon: 5});
+                    }
+                })
+            }
+        })
+    })
 </script>
 </html>

@@ -17,8 +17,8 @@
 <script>
     var cols = [[
         {field:'id', width:80, title: 'ID',type:'numbers'}
-        ,{field:'title', minWidth:120, title: '任务'}
-        ,{field:'return_val', width:180, title: '返回值'}
+        ,{field:'title', width:520, title: '任务'}
+        ,{field:'return_val', minWidth:180, title: '返回值'}
         ,{field:'create_time', width:180, title: '执行时间'}
         ,{field:'wealth', width:195, title: '操作', fixed: 'right',toolbar:'#barDemo',align:'center'}
     ]];

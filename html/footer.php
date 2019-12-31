@@ -108,4 +108,18 @@
     function closemodal() {
         parent.layer.closeAll();
     }
+    get_project_name();
+    function get_project_name() {
+        ajax_com('queueManage/queueManage-get_name',{},function (res) {
+            if(res.code==200){
+                if(res.data!=''){
+                    $('#project_name').text(res.data);
+                }else{
+                    $('#project_name').text('默认');
+                }
+            }else{
+                layer.msg(res.message, {icon: 5});
+            }
+        })
+    }
 </script>

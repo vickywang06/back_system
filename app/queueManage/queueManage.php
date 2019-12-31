@@ -21,12 +21,37 @@ class queueManage
     public $redis;
     public $queue;
     public $response;
+    public $file_name = 'project_name.txt';
 
     public function __construct()
     {
+        $name = $this->get_name();
         $this->redis    = redis::new()->connect();
-        $this->queue    = queue::new($this->redis);
+        $this->queue    = $name=='' ? queue::new($this->redis) : queue::new($this->redis)->set_name($name);
         $this->response = response::new();
+    }
+
+    /**
+     * 设置项目名称
+     * @param string $project_name
+     */
+    public function set_name(string $project_name='')
+    {
+        file_put_contents('project_name.txt',$project_name);
+    }
+
+    /**
+     * 获取项目名称
+     * @return false|string
+     */
+    public function get_name()
+    {
+        response::new()->succeed();
+        if(file_exists($this->file_name)){
+            return file_get_contents($this->file_name);
+        }else{
+            return '';
+        }
     }
 
     /**
@@ -40,8 +65,15 @@ class queueManage
      *
      * @return int
      */
-    public function add_queue(string $c, array $params = [], string $group = '', string $type = 'realtime', int $time = 0)
+    public function add_queue(string $c, array $key = [],array $val = [], string $group = '', string $type = 'realtime', int $time = 0)
     {
+        $params = [];
+        $key = array_filter($key);
+        if($key){
+            foreach($key as $k=>$v){
+                $params[$v] = $val[$k];
+            }
+        }
         $this->response->succeed();
         return $this->queue->add($c, $params, $group, $type, $time);
     }
@@ -132,9 +164,14 @@ class queueManage
      *
      * @return int
      */
-    public function kill()
+    public function kill(string $process_no)
     {
-        $res = $this->queue->kill();
+        $arr          = explode(':', $process_no);
+        $process_name = $arr[3];
+        if ($process_name == 'master') {
+            $process_name = '';
+        }
+        $res = $this->queue->kill($process_name);
         $this->response->succeed();
         return $res;
     }
@@ -144,12 +181,14 @@ class queueManage
      */
     function test()
     {
+        sleep(3600);
         date_default_timezone_set("Asia/Shanghai");
         $this->redis->set('wwj' . date('YmdHis'), '123');
     }
 
     function test2()
     {
+        sleep(200);
         date_default_timezone_set("Asia/Shanghai");
         $this->redis->set('hh' . date('YmdHis'), '123');
     }

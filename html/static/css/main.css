@@ -42,3 +42,12 @@
 .layer-bottom button {
     margin-right: 20px;
 }
+
+.project-div{
+    width: 180px;
+    height: 40px;
+    float: left;
+    margin-left: 50px;
+    margin-top: 20px;
+    font-size: 20px;
+}
