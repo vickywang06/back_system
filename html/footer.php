@@ -125,4 +125,21 @@
     function refresh() {
         location.reload();
     }
+
+    function del(type) {
+        //询问框
+        layer.confirm('确定要全部清空吗？', {
+            btn: ['是','否'] //按钮
+        }, function(){
+            ajax_com('queueManage/queueManage-del_logs',{"type":type},function (res) {
+                if(res.code==200){
+                    layer.msg('操作成功');
+                    location.reload();
+                }else{
+                    layer.msg(res.message, {icon: 5});
+                }
+            })
+        }, function(){
+        });
+    }
 </script>

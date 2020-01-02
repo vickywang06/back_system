@@ -7,6 +7,7 @@
         <div class="b-contianer">
             <div class="search-section">
                 <div class="list-button-section">
+                    <button class="layui-btn layui-btn-info" onclick="del('success')">全部清空</button>
                     <button class="layui-btn layui-btn-normal" onclick="refresh()">刷新</button>
                 </div>
             </div>

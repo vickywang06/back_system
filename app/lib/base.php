@@ -9,12 +9,8 @@
 
 namespace app\lib;
 
-use ext\cache;
 use ext\conf;
-use ext\crypt;
 use ext\factory;
-use ext\mysql;
-use ext\queue;
 
 class base extends factory
 {
@@ -43,25 +39,7 @@ class base extends factory
      */
     public function __construct()
     {
-
-        if (is_null($this->mysql)) {
-            $this->mysql = mysql::new(conf::get('mysql'));
-        }
-
-        if (is_null($this->mysql_app4)) {
-            $this->mysql_app4 = mysql::new(conf::get('mysql_app4'));
-        }
-
-        if (is_null($this->redis)) {
-            $this->queue = queue::new(conf::get('redis'))->set_name('app4');
-            $this->cache = cache::new(conf::get('redis'));
-            $this->redis = $this->queue->instance;
-        }
-
-        if (is_null($this->crypt)) {
-            $this->crypt = crypt::create(conf::get('crypt'));
-        }
-
+        conf::load('conf', 'dev');
         $this->succeed();
     }
 

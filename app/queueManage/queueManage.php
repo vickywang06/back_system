@@ -10,14 +10,16 @@
 namespace app\queueManage;
 
 
+use app\lib\base;
 use app\lib\response;
+use ext\conf;
 use ext\mpc;
 use ext\queue;
 use ext\redis;
 
-class queueManage
+class queueManage extends base
 {
-    public $tz = ['*'];
+    public $tz        = ['*'];
     public $redis;
     public $queue;
     public $response;
@@ -25,31 +27,34 @@ class queueManage
 
     public function __construct()
     {
-        $name = $this->get_name();
-        $this->redis    = redis::new()->connect();
-        $this->queue    = $name=='' ? queue::new($this->redis) : queue::new($this->redis)->set_name($name);
+        parent::__construct();
+        $name           = $this->get_name();
+        $this->redis    = redis::create(conf::get('redis'))->connect();
+        $this->queue    = $name == '' ? queue::new($this->redis) : queue::new($this->redis)->set_name($name);
         $this->response = response::new();
     }
 
     /**
      * 设置项目名称
+     *
      * @param string $project_name
      */
-    public function set_name(string $project_name='')
+    public function set_name(string $project_name = '')
     {
-        file_put_contents('project_name.txt',$project_name);
+        file_put_contents('project_name.txt', $project_name);
     }
 
     /**
      * 获取项目名称
+     *
      * @return false|string
      */
     public function get_name()
     {
         response::new()->succeed();
-        if(file_exists($this->file_name)){
+        if (file_exists($this->file_name)) {
             return file_get_contents($this->file_name);
-        }else{
+        } else {
             return '';
         }
     }
@@ -65,12 +70,12 @@ class queueManage
      *
      * @return int
      */
-    public function add_queue(string $c, array $key = [],array $val = [], string $group = '', string $type = 'realtime', int $time = 0)
+    public function add_queue(string $c, array $key = [], array $val = [], string $group = '', string $type = 'realtime', int $time = 0)
     {
         $params = [];
-        $key = array_filter($key);
-        if($key){
-            foreach($key as $k=>$v){
+        $key    = array_filter($key);
+        if ($key) {
+            foreach ($key as $k => $v) {
                 $params[$v] = $val[$k];
             }
         }
@@ -83,12 +88,24 @@ class queueManage
      *
      * @param string $c
      */
-    public function fail_task_reback(string $c)
+    public function roll_back(string $job_json)
     {
-        $params = json_decode($c, true);
-        $cmd    = $params['cmd'];
-        unset($params['cmd']);
-        return $this->add_queue($cmd, $params);
+        $this->response->succeed();
+        $res= $this->queue->rollback($job_json);
+        return $res;
+    }
+
+    /**
+     * 删除记录
+     * @param string $type
+     *
+     * @return int
+     * @throws \Exception
+     */
+    public function del_logs(string $type)
+    {
+        $this->response->succeed();
+        return $this->queue->del_logs($type);
     }
 
     /**
@@ -139,7 +156,7 @@ class queueManage
         foreach ($list as $json) {
             $arr           = json_decode($json, true);
             $arr['return'] = $arr['return'] == 'null' ? '空' : $arr['return'];
-            $res[]         = ['title' => $arr['data'], 'create_time' => $arr['time'], 'return_val' => $arr['return']];
+            $res[]         = ['title' => $arr['data'], 'create_time' => $arr['time'], 'return_val' => $arr['return'],'full_json'=>$json];
         }
         return $res;
     }

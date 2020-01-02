@@ -7,6 +7,7 @@
         <div class="b-contianer">
                 <div class="search-section">
                     <div class="list-button-section">
+                        <button class="layui-btn layui-btn-info" onclick="del('failed')">全部清空</button>
                         <button class="layui-btn layui-btn-normal" onclick="refresh()">刷新</button>
                     </div>
                 </div>
@@ -35,11 +36,12 @@
         //监听工具条
         table.on('tool(demo)', function (obj) {
             var data = obj.data;
-            var c = data.title;
+            var c = data.full_json;
             if (obj.event === 'add') {
-                ajax_com('queueManage/queueManage-fail_task_reback',{"c":c},function (res) {
+                ajax_com('queueManage/queueManage-roll_back',{"job_json":c},function (res) {
                     if(res.code==200){
                         layer.msg('操作成功');
+                        obj.del();
                     }else{
                         layer.msg(res.message, {icon: 5});
                     }
@@ -47,6 +49,5 @@
             }
         })
     })
-
 </script>
 </html>
