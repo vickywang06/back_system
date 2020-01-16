@@ -172,7 +172,8 @@ class queueManage extends base
         if ($plist) {
             return $this->response->fail(1001, '进程已经在运行中');
         }
-        $res = mpc::new()->add(['c' => 'queue/master-start'])->go(false);
+        $name           = $this->get_name();
+        $res = mpc::new()->add(['c' => 'queue/master-start', 'd'=>['name'=>$name]])->go(false);
         return $this->response->succeed();
     }
 
@@ -196,9 +197,9 @@ class queueManage extends base
     /**
      * 测试任务
      */
-    function test()
+    function test($a,$b)
     {
-        sleep(3600);
+        throw new \PDOException('aa');
         date_default_timezone_set("Asia/Shanghai");
         $this->redis->set('wwj' . date('YmdHis'), '123');
     }
