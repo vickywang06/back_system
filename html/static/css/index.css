@@ -1,0 +1,272 @@
+.b-container{
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  background: #f3f6f8;
+}
+.t-left{
+  width: 180px;
+  height: 100vh;
+  background: white;
+  float: left;
+  overflow: hidden;
+  box-shadow:  12px 0px rgb(243,246,248);
+}
+.avater{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: pink;
+  margin: 10px auto 0;
+}
+.menu{
+  width: 100%;
+  min-height: 300px;
+  margin: 5px auto 0;
+}
+.menu-item{
+  width: 100%;
+  min-height: 40px;
+  cursor: pointer;
+}
+.item{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.child-node{
+  width: 100%;
+  display: none;
+}
+.item-node{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .child-active{
+  color: RGB(97,142,235);
+} */
+
+.t-right{
+  width: calc(100% - 185px);
+  height: 100vh;
+  float: right;
+  background: #f3f6f8;
+}
+.top{
+  width: 100%;
+  height: 60px;
+  background: #ffffff;
+  box-shadow:  2px 2px rgba(255, 255, 255);
+}
+.user-box{
+  width: 80px;
+  height: 40px;
+  float: right;
+  margin-right: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.user > span{
+  font-size: 14px;
+}
+.logout{
+  width: 100%;
+  height: 20px;
+  margin-top: 10px;
+  display: none;
+  color: RGB(96,100,109);
+  font-size: 12px;
+}
+.user-box :hover .logout{
+  display: block;
+}
+/* .active{
+  background: RGB(241,246,255);
+  color: RGB(97,142,235);
+} */
+
+.b-contianer{
+  width: 100%;
+  height: calc(100vh - 100px);
+  background: white;
+  margin: 20px auto;
+}
+
+.menu-contianer{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+.add-btn{
+  width: 75px;
+  height: 35px;
+  background:RGB(64,158,255);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  margin-left: 10px;
+  color: white;
+  border-radius: 5px;
+}
+.add-btn:hover {
+  background: RGB(76,139,245);
+}
+
+.table-container{
+  width: 100%;
+  padding: 20px;
+}
+.page-contanier{
+  width: 100%;
+  height: 60px;
+}
+.page-bar{
+  float: right;
+}
+.search-container{
+  margin-left: 20px;
+}
+.td-menu{
+  text-align: center;
+}
+.td-menu > i {
+cursor: pointer;
+}
+.td-menu > i:nth-child(2){
+  margin-left: 10px;
+}
+.del-container{
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-30%, -50%);
+  width: 400px;
+  height: 200px;
+  background: rgba(243,246,248, .9);
+  display: none;
+}
+.btn-success{
+  margin-right: 5px;
+}
+.del-title{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  padding-left: 20px;
+  color: blueviolet;
+}
+.del-tip{
+  width: 100%;
+  height: 120px;
+  color: blueviolet;
+  font-size: 20px;
+  text-align: center;
+  line-height: 80px;
+}
+.delBtn-container{
+  width: 100%;
+  height: 40px;
+  text-align: right;
+}
+.add-container{
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(255,192,203, .5);
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+}
+.form-container{
+  width: 600px;
+  background: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.add-title{
+  width: 100%;
+  height: 40px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  padding-left: 20px;
+}
+.add-content{
+  padding: 20px;
+  min-height: 100px;
+}
+.row{
+  padding: 5px;
+}
+.btn-box {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.add_btn-cancel{
+  margin-right: 10px;
+}
+
+
+/* 菜单 */
+.menu-list{
+  height: 100%;
+  padding-top:20px;
+  font-size:18px;
+}
+.menu-list ul{
+  list-style: none;
+  padding:0;
+  margin:0 auto;
+}
+.menu-list ul li{
+  text-align:left;
+  color: #616c82;
+}
+.menu-list ul li.first-menu{
+  overflow: hidden;
+}
+.menu-list ul li:HOVER>a{
+  color: black;
+}
+.menu-list ul li a{
+  display:block;
+  padding:16px 0;
+  color: black;
+  text-decoration:none;
+}
+.menu-list ul li.first-menu>a{
+  padding-left: 15px;
+}
+.menu-list ul li.first-menu.active>a{
+  color: black;
+  vertical-align: middle;
+  background: RGB(241,246,255);
+}
+.menu-list ul li.first-menu.active ul li.second-menu.current a{
+  background: RGB(241,246,255);
+  color: RGB(97,142,235);
+}
+.menu-list ul li.first-menu ul{
+  display:none;
+}
+.menu-list ul li.first-menu ul li.second-menu a{
+  padding: 12px 0 12px 31px;
+  font-size:14px;
+  color: black;
+}
